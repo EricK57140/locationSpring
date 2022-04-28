@@ -28,6 +28,8 @@ public class UserDetailsDemo implements UserDetails {
 //            listeAuthority.add(new SimpleGrantedAuthority(role.getNom()));
 //        }
 
+        listeAuthority.add(new SimpleGrantedAuthority("ROLE_USER"));
+
 
 
         return listeAuthority;

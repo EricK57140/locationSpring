@@ -9,14 +9,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserDetailsServiceDemo implements UserDetailsService {
 
 
     private UtilisateursDao utilisateursDao;
 
-//    @Autowired
-//    private JwtUtils jwtUtils;
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @Autowired
     UserDetailsServiceDemo(UtilisateursDao utilisateursDao) {
@@ -24,21 +27,25 @@ public class UserDetailsServiceDemo implements UserDetailsService {
 
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
-
 //    @Override
 //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-//        Utilisateurs utilisateur = utilisateursDao
-//                .findByNomWithRoles(username)
-//                .orElseThrow(() -> new UsernameNotFoundException("Mauvais pseudo/Mot de passe"));
-//        UserDetailsDemo userDetailsDemo = new UserDetailsDemo(utilisateur);
-
-
-//
 //        return userDetailsDemo;
 //    }
+
+   @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+       List<Utilisateurs> utilisateurtest = utilisateursDao
+               .findAll();
+        
+       Utilisateurs utilisateur = utilisateursDao
+               .findByNom(username)
+               .orElseThrow(() -> new UsernameNotFoundException("Mauvais pseudo/Mot de passe"));
+
+       UserDetailsDemo userDetailsDemo = new UserDetailsDemo(utilisateur);
+
+
+
+        return userDetailsDemo;
+    }
 }

@@ -3,6 +3,9 @@ package com.company.LocParc19.controller;
 import com.company.LocParc19.dao.UtilisateursDao;
 
 import com.company.LocParc19.model.Utilisateurs;
+import com.company.LocParc19.security.JwtUtils;
+import com.company.LocParc19.security.UserDetailsDemo;
+import com.company.LocParc19.security.UserDetailsServiceDemo;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -23,11 +27,16 @@ public class UtilisateursController {
 
     private UtilisateursDao utilisateursDao;
 
-//    @Autowired
-//    JwtUtils jwtUtils;
-//
-//    @Autowired
-//    AuthenticationManager authenticationManager;
+    @Autowired
+    JwtUtils jwtUtils;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+
+
+    UserDetailsServiceDemo userDetailsServiceDemo;
 
 
 
@@ -48,8 +57,32 @@ public class UtilisateursController {
 
         return "utilisateur créé";
     }
+    @PostMapping("/connexion")
+    public String connexion(@RequestBody Utilisateurs utilisateur) throws Exception {
 
+//       Optional<Utilisateurs> optionalUtilisateur =
+//                utilisateursDao.findByNom(utilisateur.getNom());
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            utilisateur.getNom(),
+                            utilisateur.getMotDePasse()
+                    )
+            );
+        }catch(BadCredentialsException e){
+            throw new Exception(e);
+        }
 
+        UserDetails userDetails = userDetailsServiceDemo
+                .loadUserByUsername(utilisateur.getNom());
+        return jwtUtils.generateToken(new UserDetailsDemo(utilisateur));
 
+    }
+    @GetMapping("/Liste-utilisateur")
+    public List<Utilisateurs> ListeUtilisateur() {
+
+        return this.utilisateursDao.findAll();
+
+    }
 
 }

@@ -36,7 +36,7 @@ public class Utilisateurs {
     private Gestionnaires gestionnaire;
 
 
+    public Utilisateurs() {
 
-
-
+    }
 }
