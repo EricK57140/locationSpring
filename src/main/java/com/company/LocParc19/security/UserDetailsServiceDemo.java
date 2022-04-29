@@ -1,6 +1,8 @@
 package com.company.LocParc19.security;
 
+import com.company.LocParc19.dao.GestionnairesDao;
 import com.company.LocParc19.dao.UtilisateursDao;
+import com.company.LocParc19.model.Gestionnaires;
 import com.company.LocParc19.model.Utilisateurs;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +19,15 @@ public class UserDetailsServiceDemo implements UserDetailsService {
 
 
     private UtilisateursDao utilisateursDao;
+    private GestionnairesDao gestionnairesDao;
 
     @Autowired
     private JwtUtils jwtUtils;
 
     @Autowired
-    UserDetailsServiceDemo(UtilisateursDao utilisateursDao) {
+    UserDetailsServiceDemo(UtilisateursDao utilisateursDao,GestionnairesDao gestionnairesDao ) {
         this.utilisateursDao = utilisateursDao;
-
+        this.gestionnairesDao = gestionnairesDao;
     }
 
 //    @Override
@@ -42,7 +45,10 @@ public class UserDetailsServiceDemo implements UserDetailsService {
                .findByNom(username)
                .orElseThrow(() -> new UsernameNotFoundException("Mauvais pseudo/Mot de passe"));
 
+       Optional<Gestionnaires> gestionnaires = gestionnairesDao.findByIdUtilisateurs(utilisateur.getIdUtilisateurs());
+       
        UserDetailsDemo userDetailsDemo = new UserDetailsDemo(utilisateur);
+
 
 
 

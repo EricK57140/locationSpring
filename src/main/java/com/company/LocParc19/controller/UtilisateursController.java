@@ -75,7 +75,7 @@ public class UtilisateursController {
 
         UserDetails userDetails = userDetailsServiceDemo
                 .loadUserByUsername(utilisateur.getNom());
-        return jwtUtils.generateToken(new UserDetailsDemo(utilisateur));
+        return jwtUtils.generateToken(userDetails);
 
     }
     @GetMapping("/Liste-utilisateur")

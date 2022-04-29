@@ -13,8 +13,11 @@ import java.util.Collection;
 public class UserDetailsDemo implements UserDetails {
 
         private Utilisateurs utilisateurs;
-    public UserDetailsDemo(Utilisateurs utilisateurs){
-        this.utilisateurs = utilisateurs;
+        private boolean isGestionnaire;
+
+        public UserDetailsDemo(Utilisateurs utilisateurs){
+            this.utilisateurs = utilisateurs;
+            this.isGestionnaire = isGestionnaire;
     }
 
 
@@ -23,18 +26,25 @@ public class UserDetailsDemo implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         ArrayList<SimpleGrantedAuthority> listeAuthority = new ArrayList<>();
-//        Hibernate.initialize((utilisateurs.getListeRole()));
-//        for (Role role : this.utilisateurs.getListeRole()){
-//            listeAuthority.add(new SimpleGrantedAuthority(role.getNom()));
-//        }
-
-        listeAuthority.add(new SimpleGrantedAuthority("ROLE_USER"));
-
-
+        //si l'utilisateur est gestionnaire, je lui donne les droits d'administrateur
+        if (isGestionnaire){
+            listeAuthority.add(new SimpleGrantedAuthority("ROLE_GESTION"));
+        }
+        else {
+            listeAuthority.add(new SimpleGrantedAuthority("ROLE_UTILISATEUR"));
+        }
 
         return listeAuthority;
     }
 
+    //récupération de l'utilisateur contenu dans le UserDetailsLocParc
+    public Utilisateurs getUtilisateur() {
+        return utilisateurs;
+    }
+    //récupération info si gestionnaire ou non
+    public boolean isGestionnaire() {
+        return isGestionnaire;
+    }
     @Override
     public String getPassword() {
         return utilisateurs.getMotDePasse();
@@ -62,6 +72,6 @@ public class UserDetailsDemo implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return utilisateurs.isActif();
     }
 }

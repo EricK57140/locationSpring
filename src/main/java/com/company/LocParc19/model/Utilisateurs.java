@@ -1,8 +1,8 @@
 package com.company.LocParc19.model;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -14,6 +14,9 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
+
+
+
 public class Utilisateurs {
 
     @Id
@@ -26,7 +29,9 @@ public class Utilisateurs {
     private String adresseMail;
     private String telephone;
     private String motDePasse;
-    private Boolean actif;
+    private boolean actif;
+
+
 
     @OneToMany(mappedBy = "utilisateur")
 

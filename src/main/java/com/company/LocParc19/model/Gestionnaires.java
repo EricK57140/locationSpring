@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Gestionnaires extends Utilisateurs{
 
-    private int numreroGestionnaire;
+//    private int numeroGestionnaire;
 
     @OneToMany(mappedBy = "gestionnaire")
     private List<Alertes> listeAlertes = new ArrayList<>();
