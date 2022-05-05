@@ -11,10 +11,14 @@ import java.util.Optional;
 @Repository
 public interface GestionnairesDao extends JpaRepository<Gestionnaires,Integer> {
 
+
+
     @Query("FROM Gestionnaires g WHERE g.idUtilisateurs = :idUtilisateurs")
     Optional<Gestionnaires> findByIdUtilisateurs(@Param("idUtilisateurs") int idUtilisateurs);
 
+
+
     @Query("FROM Gestionnaires g WHERE g.idUtilisateurs = :idUtilisateurs")
-    Gestionnaires getByIdUtilisateurs(@Param("idUtilisateur") int idUtilisateurs);
+    Gestionnaires getByIdUtilisateurs(@Param("idUtilisateurs") int idUtilisateurs);
   
 }

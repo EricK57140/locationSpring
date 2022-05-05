@@ -38,8 +38,8 @@ public class UserDetailsServiceDemo implements UserDetailsService {
    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-       List<Utilisateurs> utilisateurtest = utilisateursDao
-               .findAll();
+//       List<Utilisateurs> utilisateurtest = utilisateursDao
+//               .findAll();
         
        Utilisateurs utilisateur = utilisateursDao
                .findByNom(username)
@@ -47,7 +47,7 @@ public class UserDetailsServiceDemo implements UserDetailsService {
 
        Optional<Gestionnaires> gestionnaires = gestionnairesDao.findByIdUtilisateurs(utilisateur.getIdUtilisateurs());
        
-       UserDetailsDemo userDetailsDemo = new UserDetailsDemo(utilisateur);
+       UserDetailsDemo userDetailsDemo = new UserDetailsDemo(utilisateur,gestionnaires.isPresent());
 
 
 

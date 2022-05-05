@@ -38,7 +38,6 @@ public class Emprunts {
     private Materiels materiel;
 
     @ManyToOne
-    @JsonIgnore
     private Utilisateurs utilisateur;
 
 }

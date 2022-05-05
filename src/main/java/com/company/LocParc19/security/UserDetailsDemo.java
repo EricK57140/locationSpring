@@ -1,8 +1,8 @@
 package com.company.LocParc19.security;
 
+import com.company.LocParc19.dao.GestionnairesDao;
 import com.company.LocParc19.model.Utilisateurs;
 
-import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,10 +14,12 @@ public class UserDetailsDemo implements UserDetails {
 
         private Utilisateurs utilisateurs;
         private boolean isGestionnaire;
+        private GestionnairesDao gestionnairesDao;
 
-        public UserDetailsDemo(Utilisateurs utilisateurs){
+        public UserDetailsDemo(Utilisateurs utilisateurs, boolean isGestionnaire){
             this.utilisateurs = utilisateurs;
             this.isGestionnaire = isGestionnaire;
+
     }
 
 
@@ -27,8 +29,10 @@ public class UserDetailsDemo implements UserDetails {
 
         ArrayList<SimpleGrantedAuthority> listeAuthority = new ArrayList<>();
         //si l'utilisateur est gestionnaire, je lui donne les droits d'administrateur
-        if (isGestionnaire){
-            listeAuthority.add(new SimpleGrantedAuthority("ROLE_GESTION"));
+//        Optional<Gestionnaires> admin = gestionnairesDao.findByIdUtilisateurs(utilisateurs.getIdUtilisateurs());
+
+        if(isGestionnaire && utilisateurs.isActif()) {
+            listeAuthority.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
         else {
             listeAuthority.add(new SimpleGrantedAuthority("ROLE_UTILISATEUR"));

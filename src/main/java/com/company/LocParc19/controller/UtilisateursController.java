@@ -6,6 +6,8 @@ import com.company.LocParc19.model.Utilisateurs;
 import com.company.LocParc19.security.JwtUtils;
 import com.company.LocParc19.security.UserDetailsDemo;
 import com.company.LocParc19.security.UserDetailsServiceDemo;
+import com.company.LocParc19.view.VueGestionnaires;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,11 +80,11 @@ public class UtilisateursController {
         return jwtUtils.generateToken(userDetails);
 
     }
-    @GetMapping("/Liste-utilisateur")
-    public List<Utilisateurs> ListeUtilisateur() {
 
+    @GetMapping("/admin/liste-utilisateurs")
+   @JsonView(VueGestionnaires.class)
+    public List<Utilisateurs> listeUtilisateurs(){
         return this.utilisateursDao.findAll();
-
     }
 
 }

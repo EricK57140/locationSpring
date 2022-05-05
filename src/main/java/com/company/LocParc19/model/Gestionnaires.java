@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +17,8 @@ import java.util.List;
 public class Gestionnaires extends Utilisateurs{
 
 //    private int numeroGestionnaire;
+@GeneratedValue(strategy = GenerationType.AUTO)
+private int IdGestionnaire;
 
     @OneToMany(mappedBy = "gestionnaire")
     private List<Alertes> listeAlertes = new ArrayList<>();
