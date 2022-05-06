@@ -22,4 +22,6 @@ public class Modele {
     @ManyToOne
     private Gestionnaires gestionnaire;
 
+    @ManyToOne
+    private Marques marques;
 }

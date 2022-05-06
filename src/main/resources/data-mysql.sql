@@ -14,7 +14,7 @@ INSERT INTO utilisateurs (ID_Utilisateur,nom,prenom,motDePasse,actif,adressePost
 INSERT INTO marques (idMarque,nomMarque) VALUES
 (1,"DELL"),
 (2,"BIC");
-;
+
 Insert into gestionnaires (ID_Utilisateur,IdGestionnaire) values
 (5,1),
 (6,2);
@@ -22,12 +22,20 @@ Insert into gestionnaires (ID_Utilisateur,IdGestionnaire) values
 Insert into emprunts (idEmprunt,dateDemande) values
 (1, "2022-04-05");
 
-Insert into materiels (idMateriel,numeroSerie,disponibilite,etatMateriel_idEtatMateriel) values
-(1, 123, 1,1),
-(2, 1234, 1,1);
+Insert into materiels (idMateriel,numeroSerie,disponibilite,etatMateriel_idEtatMateriel,modele_idModele) values
+(1, 123, 1,1,1),
+(2, 1234, 1,1,2);
 
 Insert into EtatsMateriel(idEtatMateriel,etatMateriel) values
 (1, "bon");
 
 
+
+INSERT INTO modele (idModele, nomModele,marques_idMarque,categoriesMateriels_idCategorieMateriel) VALUES
+(1, "laptopxxx",1,1),
+(2, "webcamxxx",2,2);
+
+INSERT INTO categoriesMateriels (idCategorieMateriel, nomCategorieMateriel,caracteristiques) VALUES
+(1, "laptop", "SSD 512"),
+(2, "webcam","Full HD");
 

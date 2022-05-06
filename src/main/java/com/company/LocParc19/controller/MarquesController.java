@@ -22,7 +22,7 @@ public class MarquesController {
 
 
     }
-
+    //
     @GetMapping("/admin/Liste-marque")
     @JsonView(VueMarques.class)
     public List<Marques> ListeMarque() {

@@ -18,6 +18,10 @@ public class CategoriesMateriels {
     private String nomCategorieMateriel;
     private String caracteristiques;
 
+
+
+
+
     @ManyToOne
     private Gestionnaires gestionnaire;
 }

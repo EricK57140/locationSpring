@@ -81,8 +81,10 @@ public class UtilisateursController {
 
     }
 
+    // affichage liste utilisateurs par l'administrateur
+
     @GetMapping("/admin/liste-utilisateurs")
-   @JsonView(VueGestionnaires.class)
+    @JsonView(VueGestionnaires.class)
     public List<Utilisateurs> listeUtilisateurs(){
         return this.utilisateursDao.findAll();
     }
