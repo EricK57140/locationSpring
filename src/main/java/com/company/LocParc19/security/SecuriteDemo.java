@@ -66,6 +66,7 @@ public class SecuriteDemo extends WebSecurityConfigurerAdapter {
                     .antMatchers("/inscription").permitAll()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/**").hasAnyRole("ADMIN","UTILISATEUR")
+                .and().exceptionHandling()
                 .and()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
               /*  .and()

@@ -3,9 +3,13 @@ package com.company.LocParc19.controller;
 import com.company.LocParc19.dao.EmpruntsDao;
 import com.company.LocParc19.dao.UtilisateursDao;
 import com.company.LocParc19.model.Emprunts;
+import com.company.LocParc19.model.Marques;
 import com.company.LocParc19.model.Utilisateurs;
 import com.company.LocParc19.security.JwtUtils;
 import com.company.LocParc19.security.UserDetailsServiceDemo;
+import com.company.LocParc19.view.VueEmprunts;
+import com.company.LocParc19.view.VueMarques;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +49,8 @@ public class EmpruntsController {
         this.empruntsDao = empruntsDao;
 
     }
-    @PostMapping("/enregistrement-emprunt")
-    public String enregistrementEmprunt(@RequestBody Emprunts emprunt) throws Exception{
+    @PostMapping("/demande-emprunt")
+    public String demandeEmprunt(@RequestBody Emprunts emprunt) throws Exception{
 
 
 
@@ -54,7 +58,15 @@ public class EmpruntsController {
 
         return "emprunt enregistrer";
     }
-
+//    @GetMapping("/materiel-libre/{id}")
+//    @JsonView(VueEmprunts.class)
+//    public List<Emprunts> emprunts(@PathVariable Integer id) {
+//
+//
+//
+//        return this.empruntsDao.findByIdMarque(id);
+//
+//    }
 
 
 }
